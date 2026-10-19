@@ -1,4 +1,4 @@
-# KALYVO
+# Nanan AI
 
 ## Organisation des branches
 
@@ -19,8 +19,8 @@ main  ──●──────────●──────────�
 ### 1. Première fois : récupérer le projet
 
 ```bash
-git clone https://github.com/feitan0611/KALYVO.git
-cd KALYVO
+git clone https://github.com/feitan0611/Nanan-AI.git
+cd Nanan-AI
 git checkout -b <ma-branche>
 git push -u origin <ma-branche>
 ```
