@@ -1,5 +1,9 @@
 # Nanan AI
 
+Assistant vocal en baoulé et dioula.
+
+- [`api/`](api/README.md) : API FastAPI (version mock pour l'instant)
+
 ## Organisation des branches
 
 - `main` : branche principale, version stable du projet.
