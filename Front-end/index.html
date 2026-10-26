@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nanan-AI — Les langues africaines ont une voix</title>
+  <meta name="description" content="Nanan-AI — Interface vocale contemporaine pour les langues africaines : Baoulé et Dioula.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23183D31'/><path d='M7 21V11' stroke='%23DCE9DF' stroke-width='2.4' stroke-linecap='round'/><path d='M12 25V7' stroke='%2322765A' stroke-width='2.6' stroke-linecap='round'/><path d='M17 19V13' stroke='%23FFFEFA' stroke-width='2.4' stroke-linecap='round'/><path d='M22 24V8' stroke='%23DB7A4A' stroke-width='2.6' stroke-linecap='round'/><path d='M27 20V12' stroke='%23DCE9DF' stroke-width='2.4' stroke-linecap='round'/></svg>">
+  <link rel="stylesheet" href="style.css?v=3.1.0">
+</head>
+<body>
+
+  <!-- Ambiance organique chaleureuse en arrière-plan -->
+  <div class="ambient-canvas" aria-hidden="true">
+    <div class="ambient-glow glow-top-right"></div>
+    <div class="ambient-glow glow-bottom-left"></div>
+  </div>
+
+  <!-- Conteneur Maître Dribbble / Portfolio Frame -->
+  <div class="app-frame-wrapper">
+    <div class="app-main-window">
+
+      <!-- ===================================================================
+           1. BARRE SUPÉRIEURE PREMIUM
+           Logo Nanan-AI, Statut Microphone Réel, Action Nouvelle Conversation
+           =================================================================== -->
+      <header class="app-topbar" role="banner">
+        <!-- Logo Nanan-AI avec signature acoustique -->
+        <a href="#" class="brand-cluster" aria-label="Nanan-AI Accueil">
+          <svg class="brand-soundwave-svg" width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="10" width="3.5" height="12" rx="1.75" fill="#183D31"/>
+            <rect x="9.5" y="4" width="3.5" height="24" rx="1.75" fill="#183D31"/>
+            <rect x="17" y="11" width="3.5" height="10" rx="1.75" fill="#285C47"/>
+            <rect x="24.5" y="7" width="3.5" height="18" rx="1.75" fill="#183D31"/>
+            <rect x="32" y="12" width="3.5" height="8" rx="1.75" fill="#183D31"/>
+          </svg>
+          <span class="brand-name">Nanan-AI</span>
+        </a>
+
+        <!-- Contrôles droits : Statut micro & Bouton Nouvelle conversation -->
+        <div class="topbar-actions">
+          <div id="micStatusIndicator" class="mic-status-pill is-prompt" role="status" aria-live="polite" title="Statut du microphone">
+            <span class="mic-status-dot" id="micStatusDot"></span>
+            <span class="mic-status-label" id="micStatusLabel">Micro actif</span>
+          </div>
+
+          <button id="btnNewSession" class="btn-new-conversation" title="Démarrer une nouvelle conversation" aria-label="Nouvelle conversation">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Nouvelle conversation</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ===================================================================
+           2. WORKSPACE 3 COLONNES
+           - Gauche : Navigation latérale & Illustration éditoriale
+           - Centre : Titre éditorial, Sélecteur de langue, Flux conversationnel
+           - Droite : Console Studio Vocal d'enregistrement
+           =================================================================== -->
+      <main class="app-workspace" id="mainContent">
+
+        <!-- COLONNE GAUCHE : NAVIGATION & ART ÉDITORIAL -->
+        <aside class="workspace-sidebar" aria-label="Navigation principale">
+          <nav class="sidebar-nav">
+            <button type="button" class="sidebar-nav-item is-active" id="navTabConversation" aria-current="page">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              <span>Conversation</span>
+            </button>
+
+            <button type="button" class="sidebar-nav-item" id="navTabHistory" aria-label="Ouvrir l'historique">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>Historique</span>
+            </button>
+          </nav>
+
+          <!-- Illustration éditoriale organique au pied de la colonne -->
+          <div class="sidebar-art-anchor" aria-hidden="true">
+            <img src="assets/african_woman_art.jpg" alt="" class="sidebar-art-img" loading="eager" decoding="async">
+            <div class="sidebar-art-fade-overlay"></div>
+          </div>
+        </aside>
+
+        <!-- COLONNE CENTRALE : HERO ÉDITORIAL + CONVERSATION -->
+        <section class="workspace-main" aria-label="Espace de discussion">
+
+          <!-- En-tête éditorial : Titre serif audacieux + Onde acoustique organique -->
+          <header class="editorial-hero">
+            <div class="hero-content-row">
+              <h1 class="editorial-title">
+                Les langues africaines<br>ont une voix.
+              </h1>
+
+              <!-- Oeuvre graphique d'ondes acoustiques inspirée de la référence -->
+              <div class="hero-waveform-art" aria-hidden="true">
+                <span class="art-dot terracotta-dot"></span>
+                <span class="art-bar terracotta-bar bar-1"></span>
+                <span class="art-bar sage-bar bar-2"></span>
+                <span class="art-bar light-sage-bar bar-3"></span>
+                <span class="art-bar forest-bar bar-4"></span>
+                <span class="art-bar forest-bar bar-5"></span>
+                <span class="art-bar deep-forest bar-6"></span>
+                <span class="art-bar forest-bar bar-7"></span>
+                <span class="art-bar sage-bar bar-8"></span>
+                <span class="art-bar light-sage-bar bar-9"></span>
+                <span class="art-bar terracotta-bar bar-10"></span>
+              </div>
+            </div>
+
+            <!-- Sélecteur de langue raffiné (Dioula & Baoulé) -->
+            <div class="language-pill-cluster" role="radiogroup" aria-label="Sélection de la langue">
+              <!-- Dioula (DYU) -->
+              <button type="button" class="lang-choice-pill is-active" id="langCardDyu" role="radio" aria-checked="true" data-lang="dioula" data-code="dyu">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lang-icon" aria-hidden="true">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span class="lang-name">Dioula</span>
+                <span class="lang-badge">DYU</span>
+                <span class="sample-hint-dot" id="sampleTagDyu" title="Tester un extrait audio natif en Dioula" aria-label="Écouter extrait Dioula">
+                  <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 19 12 6 20 6 4"/></svg>
+                </span>
+              </button>
+
+              <!-- Baoulé (BCI) -->
+              <button type="button" class="lang-choice-pill" id="langCardBci" role="radio" aria-checked="false" data-lang="baoule" data-code="bci">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lang-icon" aria-hidden="true">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span class="lang-name">Baoulé</span>
+                <span class="lang-badge">BCI</span>
+                <span class="sample-hint-dot" id="sampleTagBci" title="Tester un extrait audio natif en Baoulé" aria-label="Écouter extrait Baoulé">
+                  <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 19 12 6 20 6 4"/></svg>
+                </span>
+              </button>
+
+              <!-- Élément select masqué pour rétrocompatibilité -->
+              <select id="languageSelect" class="sr-only" aria-hidden="true">
+                <option value="dioula" selected>Dioula (dyu)</option>
+                <option value="baoule">Baoulé (bci)</option>
+              </select>
+            </div>
+          </header>
+
+          <!-- Boîte de conversation épurée -->
+          <div class="conversation-card">
+            <!-- En-tête de carte conversationnelle -->
+            <div class="convo-card-header">
+              <div class="convo-header-title">
+                <span class="convo-live-dot" aria-hidden="true"></span>
+                <span id="activeLangTitle">Conversation en Dioula</span>
+              </div>
+              <span class="session-counter-badge" id="sessionCounterBadge">0 échange</span>
+            </div>
+
+            <!-- Espace d'affichage des messages -->
+            <div class="conversation-stream-area" id="conversationStream" role="log" aria-live="polite">
+
+              <!-- État Vide : Minimaliste et soigné -->
+              <div class="empty-conversation-state" id="emptyConversationState">
+                <div class="empty-bubble-icon" aria-hidden="true">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#A6B3AA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </div>
+                <h2 class="empty-state-title">Aucun message pour le moment</h2>
+                <p class="empty-state-subtitle">Commencez une conversation en enregistrant votre voix.</p>
+                <span id="emptyLangMention" class="sr-only">Dioula</span>
+
+                <button type="button" id="btnQuickDemo" class="btn-demo-pill" title="Charger un échantillon vocal natif pour tester le flux immédiatement">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <polygon points="6 4 19 12 6 20 6 4"/>
+                  </svg>
+                  <span>Tester avec un échantillon réel</span>
+                </button>
+              </div>
+
+              <!-- Liste des messages échangés -->
+              <div class="messages-flow-list hidden" id="messagesList"></div>
+
+              <!-- Synthèse de réponse en cours -->
+              <div class="mock-processing-card hidden" id="processingCard" aria-live="assertive">
+                <div class="processing-top-bar">
+                  <span class="processing-ping-dot"></span>
+                  <span class="processing-label" id="processingLangLabel">Synthèse en cours...</span>
+                </div>
+                <div class="processing-wave-bars">
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <!-- COLONNE DROITE : STUDIO VOCAL D'ENREGISTREMENT -->
+        <aside class="workspace-studio-col" aria-label="Studio d'enregistrement vocal">
+          <div class="studio-console-card" id="recordingDock">
+
+            <!-- En-tête sombre vert forêt avec motif organique -->
+            <header class="studio-card-header">
+              <div class="studio-header-title-group">
+                <svg class="studio-header-wave-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+                  <line x1="3" y1="12" x2="3" y2="12.01"/>
+                  <line x1="7" y1="8" x2="7" y2="16"/>
+                  <line x1="11" y1="4" x2="11" y2="20"/>
+                  <line x1="15" y1="9" x2="15" y2="15"/>
+                  <line x1="19" y1="12" x2="19" y2="12.01"/>
+                </svg>
+                <div class="studio-header-texts">
+                  <h3 class="studio-title">Enregistrement</h3>
+                  <span class="studio-subtitle" id="studioLangSubtitle">Dioula - DYU</span>
+                </div>
+              </div>
+
+              <!-- Motif décoratif d'ondes vectorielles d'arrière-plan -->
+              <svg class="studio-bg-curve" viewBox="0 0 120 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M0 60C30 50 40 10 70 30C100 50 110 10 130 5" stroke="rgba(255,255,255,0.08)" stroke-width="24" stroke-linecap="round"/>
+                <path d="M-10 40C20 30 35 5 65 20C95 35 105 10 125 5" stroke="rgba(255,255,255,0.06)" stroke-width="12" stroke-linecap="round"/>
+              </svg>
+            </header>
+
+            <!-- Corps du Studio : Scène centrale avec anneaux concentriques & micro -->
+            <div class="studio-body">
+
+              <div class="studio-hero-stage">
+                <!-- Anneaux d'aura concentriques animés -->
+                <div class="studio-ripple-ring ring-3" aria-hidden="true"></div>
+                <div class="studio-ripple-ring ring-2" aria-hidden="true"></div>
+                <div class="studio-ripple-ring ring-1" aria-hidden="true"></div>
+
+                <!-- Bouton microphone central -->
+                <button type="button" id="btnRecord" class="btn-studio-mic" aria-label="Démarrer l'enregistrement vocal" title="Enregistrer votre voix">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" class="mic-svg" aria-hidden="true">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="22"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Minuteur de prise de son (00:00 / 00:08) -->
+              <div class="studio-timer-display" id="recordingTimer" aria-live="off">00:00</div>
+
+              <!-- Spectre audio réactif en temps réel (16 barres symétriques) -->
+              <div class="studio-visualizer-deck" aria-hidden="true">
+                <div class="audio-visualizer-bars" id="audioVisualizer">
+                  <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+                  <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+                  <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+                  <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+                </div>
+              </div>
+
+              <!-- Bouton principal d'action : Arrêter / Enregistrer -->
+              <div class="studio-primary-action-wrap">
+                <button type="button" id="btnStop" class="btn-studio-stop" aria-label="Terminer ou démarrer l'enregistrement">
+                  <span class="stop-icon-glyph" id="stopIconGlyph" aria-hidden="true"></span>
+                  <span id="btnStopText">Arrêter</span>
+                </button>
+                <button type="button" id="btnCancelRecording" class="btn-studio-cancel hidden" aria-label="Annuler l'enregistrement">
+                  Annuler
+                </button>
+              </div>
+
+              <!-- Panneau de préécoute lecteur masqué en mode direct -->
+              <div class="dock-panel dock-ready hidden" id="dockReadyPanel"></div>
+              <div class="dock-panel dock-recording hidden" id="dockRecordingPanel"></div>
+              <div class="dock-panel dock-preview hidden" id="dockPreviewPanel">
+                <span id="previewDurationLabel" class="sr-only">00:00</span>
+                <div id="recordedPreviewPlayer"></div>
+                <button type="button" id="btnDiscardRecording" class="sr-only">Supprimer</button>
+              </div>
+
+              <!-- Boutons secondaires : Écouter & Envoyer (Pills côte-à-côte) -->
+              <div class="studio-secondary-actions">
+                <button type="button" id="btnRetryRecord" class="btn-action-listen" aria-label="Écouter la prise enregistrée" title="Écouter votre message vocal">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <polygon points="6 4 19 12 6 20 6 4"/>
+                  </svg>
+                  <span id="btnListenLabel">Écouter</span>
+                </button>
+
+                <button type="button" id="btnSend" class="btn-action-send" aria-label="Envoyer le message audio" title="Envoyer le message à Nanan-AI">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
+                  <span>Envoyer</span>
+                </button>
+              </div>
+
+              <!-- Carte de statut & retour d'état inférieur -->
+              <div class="studio-status-card" id="studioStatusCard">
+                <div class="studio-status-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#183D31" stroke-width="2.2" stroke-linecap="round">
+                    <path d="M4 12v-1"/>
+                    <path d="M8 15V9"/>
+                    <path d="M12 18V6"/>
+                    <path d="M16 15V9"/>
+                    <path d="M20 12v-1"/>
+                  </svg>
+                </div>
+                <div class="studio-status-texts">
+                  <h4 class="studio-status-headline" id="studioStatusTitle">Prêt à envoyer</h4>
+                  <p class="studio-status-desc" id="studioStatusDesc">Votre message a été enregistré</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </aside>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Tiroir Latéral d'Historique -->
+  <aside class="history-drawer-backdrop hidden" id="historyDrawerBackdrop" role="dialog" aria-modal="true" aria-labelledby="historyDrawerTitle">
+    <div class="history-drawer">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <h3 id="historyDrawerTitle">Historique des échanges</h3>
+        </div>
+        <button type="button" class="btn-drawer-close" id="btnCloseHistory" aria-label="Fermer l'historique">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-content" id="historyDrawerContent">
+        <div class="history-empty" id="historyEmpty">
+          <p>Aucun échange dans cette session pour l'instant.</p>
+        </div>
+        <div class="history-list hidden" id="historyList"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Modale de réinitialisation -->
+  <div class="modal-backdrop hidden" id="resetModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-window">
+      <h3 id="modalTitle" class="modal-headline">Nouvelle conversation ?</h3>
+      <p class="modal-copy">Les messages de la session actuelle seront effacés.</p>
+      <div class="modal-buttons-row">
+        <button id="btnCancelReset" class="btn-modal btn-modal-cancel">Annuler</button>
+        <button id="btnConfirmReset" class="btn-modal btn-modal-confirm">Effacer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conteneur de Toasts -->
+  <div id="toastContainer" class="toast-stack-container" aria-live="polite"></div>
+
+  <!-- Éléments masqués pour stricte conformité technique et compatibilité avec les scripts existants -->
+  <div class="sr-only" aria-hidden="true">
+    <div id="statusBadge" class="status-badge status-ready"><span id="statusText">État : Prêt</span></div>
+    <div id="messageBox" class="message-box hidden" role="alert"></div>
+    <audio id="recordedAudio"></audio>
+    <p id="noRecordingText"></p>
+    <audio id="responseAudio"></audio>
+    <p id="noResponseText"></p>
+    <div id="mockDetails"><span id="mockFileLoaded">-</span></div>
+    <span id="consoleModeBadge">Microphone</span>
+  </div>
+
+  <script src="app.js?v=3.1.0"></script>
+</body>
+</html>
